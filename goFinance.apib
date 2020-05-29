@@ -1,0 +1,95 @@
+FORMAT: 1A
+HOST: http://localhost:3333
+
+# Group API
+
+## Sobre [/]
+
+Através dessa API é possível realizar o cadastro e consulta a transações financeiras
+para ter maior controle e planejamento de gastos.
+
+# Group Potes da Riqueza
+
+## POTES DA RIQUEZA [/pots]
+
+### Criar Pots [POST]
+
++ Request Criar potes da riqueza
+
+    + Headers
+
+            Accept: application/json
+            Content-Type: application/json
+    + Attributes (Pots)
+
++ Response 201 (application/json)
+    + Attributes (CreatedPots)
+)
+
+### Listar Potes [GET]
+
++ Response 200 (application/json)
+    + Attributes (array[Pots])
+
++ Response 404 (application/json)
+    + Attributes (Error)
+
+
+### BUSCA POTES ESPECIFICOS [/pots/{id_potes}]
+
++ Parameters
+    + id_potes: e8rt5af (string, required) - ID da potes
+
+
+### Exibir Potes [GET]
+
++ Response 200 (application/json)
+    + Attributes (Pots)
+
++ Response 404 (application/json)
+    + Attributes (Error)
+
+### Atualizar Pots [PUT]
+
++ Request Atualizar conteudo dos potes
+
+    + Headers
+
+            Accept: application/json
+            Content-Type: application/json
+    + Attributes (PotsUpdate)
+
++ Response 201 (application/json)
+    + Attributes (CreatedPots)
+)
+
+### Excluir potes [DELETE]
+
++ Response 200 (application/json)
+
+
++ Response 404 (application/json)
+    + Attributes (Error)
+
+
+# Group Usuários
+
+
+
+# Data Structures
+
+## Pots (object)
++ name : contas fixas (string) - Nome do Pote
++ value : 50 (number) - Valor disponivel
+
+
+## PotsUpdate (Pots)
++ id_potes (number) - Id da potes
+
+## CreatedPots (object)
++ id (number) - Id gerado
+
+
+## Error (object)
++ code: 400 (number)
++ message : Not Found Pots (string)
