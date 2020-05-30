@@ -3,7 +3,7 @@ import path from 'path';
 import { Connection, getRepository, getConnection } from 'typeorm';
 import createConnection from '../database';
 
-import Transaction from '../models/Transaction';
+import Transaction from '../models/Transactions';
 import Category from '../models/Category';
 
 import app from '../app';
