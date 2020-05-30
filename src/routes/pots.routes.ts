@@ -1,15 +1,18 @@
 import { Router } from 'express';
+import { getRepository } from 'typeorm';
 
 import CreatePotsService from '../services/CreatePotsService';
+import UpdatePotsService from '../services/UpdatePotsService';
+import Pots from '../models/Pots';
 
 const potsRouter = Router();
 
-// pots.get('/', async (request, response) => {
-//   const transactions = await transactionsRepository.find();
-//   const balance = await transactionsRepository.getBalance();
+potsRouter.get('/', async (request, response) => {
+  const potsRepository = await getRepository(Pots);
+  const pots = await potsRepository.find();
 
-//   return response.json({ transactions, balance });
-// });
+  return response.json({ pots });
+});
 
 potsRouter.post('/', async (request, response) => {
   const { title, value } = request.body;
@@ -23,12 +26,14 @@ potsRouter.post('/', async (request, response) => {
   return response.json(transaction);
 });
 
-// pots.delete('/:id', async (request, response) => {
-//   const { id } = request.params;
-//   const deleteTransaction = new DeleteTransactionService();
-//   await deleteTransaction.execute(id);
+potsRouter.put('/:id', async (request, response) => {
+  const { id } = request.params;
+  const { title, value } = request.body;
+  const updatePots = new UpdatePotsService();
 
-//   return response.status(204).send();
-// });
+  const pots = await updatePots.execute({ id, title, value });
+
+  return response.json(pots).status(204);
+});
 
 export default potsRouter;

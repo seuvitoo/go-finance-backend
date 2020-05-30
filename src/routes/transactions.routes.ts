@@ -1,6 +1,7 @@
 import { Router } from 'express';
 
 import CreateTransactionService from '../services/CreateTransactions';
+import UpdatePostService from '../services/UpdatePotsService';
 
 const transactionsRouter = Router();
 
@@ -27,8 +28,8 @@ transactionsRouter.post('/', async (request, response) => {
 
 transactionsRouter.delete('/:id', async (request, response) => {
   const { id } = request.params;
-  const deleteTransaction = new DeleteTransactionService();
-  await deleteTransaction.execute(id);
+  const updatePot = new UpdatePostService();
+  await updatePot.execute(id);
 
   return response.status(204).send();
 });
