@@ -1,8 +1,7 @@
 import { getRepository } from 'typeorm';
 
-import AppError from '../errors/AppError';
-
-import Pots from '../models/Pots';
+import Pots from '@modules/goals/infra/typeorm/entities/Goals';
+import AppError from '@shared/errors/AppError';
 
 interface Request {
   title: string;

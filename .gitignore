@@ -10,3 +10,4 @@ tmp/*
 #arquivos
 yarn.lock
 ormconfig.json
+yarn-error.log
