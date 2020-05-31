@@ -5,9 +5,9 @@
   "license": "MIT",
   "scripts": {
     "build": "tsc",
-    "dev:server": "ts-node-dev --inspect --transpileOnly --ignore-watch node_modules src/server.ts",
-    "start": "ts-node src/index.ts",
-    "typeorm": "ts-node-dev ./node_modules/typeorm/cli.js",
+    "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpileOnly --ignore-watch node_modules src/shared/infra/http/server.ts",
+    "start": "ts-node -r tsconfing-paths/register  src/shared/infra/http/server.ts",
+    "typeorm": "ts-node-dev -r tsconfing-paths/register ./node_modules/typeorm/cli.js",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
     "api": "drakov -f ./goFinance.apib -p 3000 --watch",
     "doc": "aglio -i goFinance.apib -s"
@@ -49,6 +49,7 @@
     "ts-jest": "^25.3.1",
     "ts-node": "3.3.0",
     "ts-node-dev": "^1.0.0-pre.44",
+    "tsconfig-paths": "^3.9.0",
     "typescript": "^3.8.3"
   }
 }

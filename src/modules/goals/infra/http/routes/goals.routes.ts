@@ -1,20 +1,20 @@
 import { Router } from 'express';
 import { getRepository } from 'typeorm';
 
-import CreatePotsService from '../services/CreatePotsService';
-import UpdatePotsService from '../services/UpdatePotsService';
-import Pots from '../models/Pots';
+import CreatePotsService from '@modules/goals/services/CreatePotsService';
+import UpdatePotsService from '@modules/goals/services/UpdatePotsService';
+import Pots from '@modules/goals/infra/typeorm/entities/Goals';
 
-const potsRouter = Router();
+const goalsRouter = Router();
 
-potsRouter.get('/', async (request, response) => {
+goalsRouter.get('/', async (request, response) => {
   const potsRepository = await getRepository(Pots);
   const pots = await potsRepository.find();
 
   return response.json({ pots });
 });
 
-potsRouter.post('/', async (request, response) => {
+goalsRouter.post('/', async (request, response) => {
   const { title, value } = request.body;
   const createPotsService = new CreatePotsService();
 
@@ -26,7 +26,7 @@ potsRouter.post('/', async (request, response) => {
   return response.json(transaction);
 });
 
-potsRouter.put('/:id', async (request, response) => {
+goalsRouter.put('/:id', async (request, response) => {
   const { id } = request.params;
   const { title, value } = request.body;
   const updatePots = new UpdatePotsService();
@@ -36,4 +36,4 @@ potsRouter.put('/:id', async (request, response) => {
   return response.json(pots).status(204);
 });
 
-export default potsRouter;
+export default goalsRouter;
