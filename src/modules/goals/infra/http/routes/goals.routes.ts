@@ -1,39 +1,36 @@
 import { Router } from 'express';
-import { getRepository } from 'typeorm';
+import { container } from 'tsyringe';
 
-import CreatePotsService from '@modules/goals/services/CreatePotsService';
-import UpdatePotsService from '@modules/goals/services/UpdatePotsService';
-import Pots from '@modules/goals/infra/typeorm/entities/Goals';
+import CreateGoalsService from '@modules/goals/services/CreateGoalsService';
+import UpdateGoalsService from '@modules/goals/services/UpdateGoalsService';
 
 const goalsRouter = Router();
 
-goalsRouter.get('/', async (request, response) => {
-  const potsRepository = await getRepository(Pots);
-  const pots = await potsRepository.find();
-
-  return response.json({ pots });
-});
+// goalsRouter.get('/', async (request, response) => {
+//   const goals = await goalsRepository.find();
+//   return response.json({ goals });
+// });
 
 goalsRouter.post('/', async (request, response) => {
   const { title, value } = request.body;
-  const createPotsService = new CreatePotsService();
+  const createGoalsService = container.resolve(CreateGoalsService);
 
-  const transaction = await createPotsService.create({
+  const goals = await createGoalsService.create({
     title,
     value,
   });
 
-  return response.json(transaction);
+  return response.json(goals);
 });
 
 goalsRouter.put('/:id', async (request, response) => {
   const { id } = request.params;
   const { title, value } = request.body;
-  const updatePots = new UpdatePotsService();
+  const updateGoals = new UpdateGoalsService();
 
-  const pots = await updatePots.execute({ id, title, value });
+  const goals = await updateGoals.execute({ id, title, value });
 
-  return response.json(pots).status(204);
+  return response.json(goals).status(204);
 });
 
 export default goalsRouter;

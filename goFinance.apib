@@ -10,9 +10,9 @@ para ter maior controle e planejamento de gastos.
 
 # Group Potes da Riqueza
 
-## POTES DA RIQUEZA [/pots]
+## POTES DA RIQUEZA [/goals]
 
-### Criar Pots [POST]
+### Criar goals [POST]
 
 + Request Criar potes da riqueza
 
@@ -20,7 +20,7 @@ para ter maior controle e planejamento de gastos.
 
             Accept: application/json
             Content-Type: application/json
-    + Attributes (Pots)
+    + Attributes (goals)
 
 + Response 201 (application/json)
     + Attributes (CreatedPots)
@@ -29,13 +29,13 @@ para ter maior controle e planejamento de gastos.
 ### Listar Potes [GET]
 
 + Response 200 (application/json)
-    + Attributes (array[Pots])
+    + Attributes (array[goals])
 
 + Response 404 (application/json)
     + Attributes (Error)
 
 
-### BUSCA POTES ESPECIFICOS [/pots/{id_potes}]
+### BUSCA POTES ESPECIFICOS [/goals/{id_potes}]
 
 + Parameters
     + id_potes: e8rt5af (string, required) - ID da potes
@@ -44,12 +44,12 @@ para ter maior controle e planejamento de gastos.
 ### Exibir Potes [GET]
 
 + Response 200 (application/json)
-    + Attributes (Pots)
+    + Attributes (goals)
 
 + Response 404 (application/json)
     + Attributes (Error)
 
-### Atualizar Pots [PUT]
+### Atualizar goals [PUT]
 
 + Request Atualizar conteudo dos potes
 
@@ -78,12 +78,12 @@ para ter maior controle e planejamento de gastos.
 
 # Data Structures
 
-## Pots (object)
+## goals (object)
 + name : contas fixas (string) - Nome do Pote
 + value : 50 (number) - Valor disponivel
 
 
-## PotsUpdate (Pots)
+## PotsUpdate (goals)
 + id_potes (number) - Id da potes
 
 ## CreatedPots (object)
@@ -92,4 +92,4 @@ para ter maior controle e planejamento de gastos.
 
 ## Error (object)
 + code: 400 (number)
-+ message : Not Found Pots (string)
++ message : Not Found goals (string)

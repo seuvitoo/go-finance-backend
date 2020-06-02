@@ -6,7 +6,7 @@ import {
   Column,
 } from 'typeorm';
 
-@Entity('pots')
+@Entity('goals')
 class Goals {
   @PrimaryGeneratedColumn('uuid')
   id: string;
