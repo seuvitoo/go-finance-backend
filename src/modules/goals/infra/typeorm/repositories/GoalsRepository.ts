@@ -2,6 +2,7 @@ import { Repository, getRepository } from 'typeorm';
 
 import IGoalsRepository from '@modules/goals/repositories/IGoalsRepository';
 import ICreateGoalsDTO from '@modules/goals/dtos/ICreateGoalsDTO';
+import AppError from '@shared/errors/AppError';
 import Goals from '../entities/Goals';
 
 class GoalsRepository implements IGoalsRepository {
@@ -20,9 +21,15 @@ class GoalsRepository implements IGoalsRepository {
   }
 
   public async create({ title, value }: ICreateGoalsDTO): Promise<Goals> {
-    const goals = this.ormRepository.create({ title, value });
-    await this.ormRepository.save(goals);
-    return goals;
+    try {
+      console.log('aqui');
+      const goals = this.ormRepository.create({ title, value });
+      await this.ormRepository.save(goals);
+      console.log('aqui1');
+      return goals;
+    } catch (error) {
+      throw new AppError('Já existe uma chave com esse nome', 400);
+    }
   }
 }
 
