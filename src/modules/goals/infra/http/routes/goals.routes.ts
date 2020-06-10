@@ -1,10 +1,10 @@
 import { Router } from 'express';
 
 import GoalsController from '../../controllers/GoalsController';
-// import UpdateGoalsService from '@modules/goals/services/UpdateGoalsService';
+
+const goalsRouter = Router();
 
 const goalsController = new GoalsController();
-const goalsRouter = Router();
 
 // goalsRouter.get('/', async (request, response) => {
 //   const goalsRepository = new GoalsRepository();

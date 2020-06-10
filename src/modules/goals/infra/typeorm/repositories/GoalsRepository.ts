@@ -22,10 +22,8 @@ class GoalsRepository implements IGoalsRepository {
 
   public async create({ title, value }: ICreateGoalsDTO): Promise<Goals> {
     try {
-      console.log('aqui');
       const goals = this.ormRepository.create({ title, value });
       await this.ormRepository.save(goals);
-      console.log('aqui1');
       return goals;
     } catch (error) {
       throw new AppError('Já existe uma chave com esse nome', 400);

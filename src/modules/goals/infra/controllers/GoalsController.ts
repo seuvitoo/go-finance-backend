@@ -1,15 +1,12 @@
 import { Response, Request } from 'express';
+import { container } from 'tsyringe';
 
 import CreateGoalsService from '@modules/goals/services/CreateGoalsService';
-import GoalsRepository from '@modules/goals/infra/typeorm/repositories/GoalsRepository';
-import Goals from '../typeorm/entities/Goals';
 
 export default class GoalsController {
-  public async create(response: Response, request: Request): Promise<Response> {
+  public async create(request: Request, response: Response): Promise<Response> {
     const { title, value } = request.body;
-
-    const goalsRepository = new GoalsRepository();
-    const createGoalsService = new CreateGoalsService(goalsRepository);
+    const createGoalsService = container.resolve(CreateGoalsService);
 
     const goals = await createGoalsService.create({
       title,
