@@ -7,7 +7,7 @@
     "build": "tsc",
     "dev:server": "ts-node-dev -r tsconfig-paths/register --inspect --transpileOnly --ignore-watch node_modules src/shared/infra/http/server.ts",
     "start": "ts-node -r tsconfing-paths/register  src/shared/infra/http/server.ts",
-    "typeorm": "ts-node-dev -r tsconfing-paths/register ./node_modules/typeorm/cli.js",
+    "typeorm": "ts-node-dev -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "test": "cross-env NODE_ENV=test jest --detectOpenHandles",
     "api": "drakov -f ./goFinance.apib -p 3000 --watch",
     "doc": "aglio -i goFinance.apib -s"
@@ -23,6 +23,7 @@
     "multer": "^1.4.2",
     "pg": "^8.0.0",
     "reflect-metadata": "^0.1.13",
+    "tsyringe": "^4.3.0",
     "typeorm": "^0.2.24",
     "uuidv4": "^6.1.0"
   },

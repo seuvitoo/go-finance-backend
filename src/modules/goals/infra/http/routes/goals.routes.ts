@@ -1,39 +1,27 @@
 import { Router } from 'express';
-import { getRepository } from 'typeorm';
 
-import CreatePotsService from '@modules/goals/services/CreatePotsService';
-import UpdatePotsService from '@modules/goals/services/UpdatePotsService';
-import Pots from '@modules/goals/infra/typeorm/entities/Goals';
+import GoalsController from '../../controllers/GoalsController';
 
 const goalsRouter = Router();
 
-goalsRouter.get('/', async (request, response) => {
-  const potsRepository = await getRepository(Pots);
-  const pots = await potsRepository.find();
+const goalsController = new GoalsController();
 
-  return response.json({ pots });
-});
+// goalsRouter.get('/', async (request, response) => {
+//   const goalsRepository = new GoalsRepository();
+//   const goals = await goalsRepository.find();
+//   return response.json({ goals });
+// });
 
-goalsRouter.post('/', async (request, response) => {
-  const { title, value } = request.body;
-  const createPotsService = new CreatePotsService();
+goalsRouter.post('/', goalsController.create);
 
-  const transaction = await createPotsService.create({
-    title,
-    value,
-  });
+// goalsRouter.put('/:id', async (request, response) => {
+//   const { id } = request.params;
+//   const { title, value } = request.body;
+//   const updateGoals = new UpdateGoalsService();
 
-  return response.json(transaction);
-});
+//   const goals = await updateGoals.execute({ id, title, value });
 
-goalsRouter.put('/:id', async (request, response) => {
-  const { id } = request.params;
-  const { title, value } = request.body;
-  const updatePots = new UpdatePotsService();
-
-  const pots = await updatePots.execute({ id, title, value });
-
-  return response.json(pots).status(204);
-});
+//   return response.json(goals).status(204);
+// });
 
 export default goalsRouter;
