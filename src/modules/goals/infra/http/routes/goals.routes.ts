@@ -1,3 +1,4 @@
+import UpdateGoalsService from '@modules/goals/services/UpdateGoalsService';
 import { Router } from 'express';
 
 import GoalsController from '../../controllers/GoalsController';
@@ -14,14 +15,14 @@ const goalsController = new GoalsController();
 
 goalsRouter.post('/', goalsController.create);
 
-// goalsRouter.put('/:id', async (request, response) => {
-//   const { id } = request.params;
-//   const { title, value } = request.body;
-//   const updateGoals = new UpdateGoalsService();
+goalsRouter.put('/:id', async (request, response) => {
+  const { id } = request.params;
+  const { title, value } = request.body;
+  const updateGoals = new UpdateGoalsService();
 
-//   const goals = await updateGoals.execute({ id, title, value });
+  const goals = await updateGoals.execute({ id, title, value });
 
-//   return response.json(goals).status(204);
-// });
+  return response.json(goals).status(204);
+});
 
 export default goalsRouter;
